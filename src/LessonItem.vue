@@ -4,14 +4,38 @@
     <span class="title"> {{ lesson.title }} </span>
     <span class="price"> {{ lesson.price }} </span>
     <span class="teachers"> {{ teachers }} </span>
-    <div class="buy"> 加入購物車 </div>
+    <div
+      :class="btnClass"
+      @click="addToCart(lesson)"
+    >
+     {{ btnLabel }}
+    </div>
   </div>
 </template>
 
 <script>
+import { mapMutations, mapGetters } from 'vuex';
+
 export default {
   props: ['lesson'],
   computed: {
+    ...mapGetters(['isLessonInCart']),
+    inCart () {
+      return this.isLessonInCart(this.lesson)
+    },
+    btnClass () {
+      return {
+        buy: true,
+        bought: this.inCart
+      }
+    },
+    btnLabel () {
+      return (
+        this.inCart
+        ? '已加入購物車'
+        : '加入購物車'
+      )
+    },
     teachers () {
       return this.lesson.teachers
         .map(teacher => teacher.username)
@@ -22,6 +46,9 @@ export default {
         backgroundImage: `url('${this.lesson.cover}')`
       }
     }
+  },
+  methods: {
+    ...mapMutations(['addToCart'])
   }
 };
 </script>
@@ -37,7 +64,6 @@ export default {
     box-shadow: 1px 1px 15px #999;
     margin: 50px;
     vertical-align: top;
-
     cursor: pointer;
   }
 
@@ -87,6 +113,7 @@ export default {
     text-align: center;
     padding: 6px;
     font-size: .7em;
+    background-color: #eee;
     transition: background-color .3s;
   }
 
@@ -95,6 +122,7 @@ export default {
   }
 
   .buy.bought {
-    background-color: #ddd;
+    background-color: #1ab885;
+    color: white;
   }
 </style>

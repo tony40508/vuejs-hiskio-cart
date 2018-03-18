@@ -8,11 +8,32 @@ const LESSONS_URL = 'https://hiskio.com/api/v1/courses/latest?type=all&level=all
 const store = new Vuex.Store({
   state: {
     lessons: [],
-
+    cart: []
+  },
+  getters: {
+    lessonsInCart: state => (
+      state.cart.lenght
+    ),
+    priceInCart: state => (
+      state.cart.reduce((acc, lesson) => {
+        return acc + lesson.price;
+      }, 0)
+    ),
+    isLessonInCart: state => lesson => (
+      state.cart.findIndex(({ id }) => (
+        id === lesson.id
+      )) !== -1
+    )
+    // 回傳一個傳入 lesson 的函式，cart 裡每個 lesson 解構成 id
   },
   mutations: {
     setLessons(state, lessons) {
       state.lessons = lessons;
+    },
+    addToCart(state, lesson) {
+      state.cart = state.cart.concat(lesson);
+      // state.cart = [...state.cart, lesson];
+      // state.cart.push(lesson);
     }
   },
   actions: {

@@ -1,23 +1,23 @@
 <template>
   <div class="header">
     <span class="cart">
-      <span> 購物車內： </span>
+      <span>購物車內:</span>
       <span class="lessons"> {{ lessons }} </span>
-      <span> 套課程，共 </span>
-      <span class="price"> {{ price }} </span>
+      <span>套課程，共</span>
+      <span class="price">{{ price }}元</span>
     </span>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
   computed: {
-    lessons () {
-      return 0;
-    },
-    price () {
-      return 0;
-    }
+    ...mapGetters({
+      lessons: 'lessonsInCart',
+      price: 'priceInCart'
+    }),
   }
 }
 </script>
@@ -33,9 +33,10 @@ export default {
   text-align: center;
   color: white;
   z-index: 3;
+  letter-spacing: 4px;
 }
 
 .lessons, .price {
-  color: #ffc
+  color: #ffc;
 }
 </style>
