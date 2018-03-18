@@ -10,14 +10,17 @@
 </template>
 
 <script>
-  export default {
-    computed: {
-      lessons () {
-        return this.$store.state.lessons;
-      }
-    },
-    mounted () {
-      this.$store.dispatch('fetchLessons');
-    }
+import { mapState, mapActions } from 'vuex';
+
+export default {
+  computed: {
+    ...mapState(['lessons'])
+  },
+  methods: {
+    ...mapActions(['fetchLessons'])
+  },
+  mounted () {
+    this.fetchLessons();
   }
+};
 </script>
