@@ -28,10 +28,10 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
   .list {
-    display: flex;
+    display: inline-flex;
     flex-flow: row wrap;
-    justify-content: space-between;
+    justify-content: space-around;
   }
 </style>

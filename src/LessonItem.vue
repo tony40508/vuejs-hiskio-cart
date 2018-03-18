@@ -1,10 +1,10 @@
 <template>
   <div class="lesson">
     <div class="cover" :style="coverStyle"/>
-    <span class="title">{{ lesson.title }}</span>
-    <span class="price">{{ lesson.price }}</span>
-    <span class="teachers">{{ teachers }}</span>
-    <div class="buy">加入購物車</div>
+    <span class="title"> {{ lesson.title }} </span>
+    <span class="price"> {{ lesson.price }} </span>
+    <span class="teachers"> {{ teachers }} </span>
+    <div class="buy"> 加入購物車 </div>
   </div>
 </template>
 
@@ -26,22 +26,24 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
   .lesson {
     display: inline-block;
-    width: 200px;
+    max-width: 200px;
+    min-width: 200px;
     min-height: 230px;
     border-radius: 3px;
     overflow: hidden;
     box-shadow: 1px 1px 15px #999;
     margin: 50px;
     vertical-align: top;
-    transition: all .3s;
+
     cursor: pointer;
   }
 
   .lesson:hover {
-    transform: translate(-5px, -5px);
+      transform: translate(-5px, -5px);
+      transition: transform .3s;
   }
 
   .cover {
